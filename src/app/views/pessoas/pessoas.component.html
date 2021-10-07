@@ -1,1 +1,52 @@
-<p>pessoas works!</p>
+<div class="container">
+  <h3 class="text-center">Todas pessoas do Sistema</h3>
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col botoes" >
+        <button class="btn btn-success" [routerLink]="['/formulario/cliente-fisico']" routerLinkActive="router-link-active" >Novo</button>
+        <button class="btn btn-primary" *ngIf="!isVazio()" style="margin-left: 10px;" (click)="abrirModalRelatorio()">Relatorio</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isVazio()">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Data de Cadastro</th>
+          <th>Tipo de Pessoa</th>
+          <th>Ações</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pessoa of pessoas">
+            <td>{{pessoa.id}}</td>
+            <td>{{pessoa.nome}}</td>
+            <td>{{pessoa.telefone | mask : '(00) 0 0000-0000'}}</td>
+            <td>{{pessoa.dataCadastro | date}}</td>
+            <td>{{pessoa.tipoDePessoa}}</td>
+            <td>
+              <button class="btn btn-primary" (click)="editar(pessoa.id, pessoa.tipoDePessoa)">Atualizar</button>
+              <button class="btn btn-danger"  style="margin-left: 5px;" (click)="deletar(pessoa.id)">Deletar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination [totalItems]="totalElements"       (pageChanged)="pageChanged($event)"
+    [itemsPerPage]="tamanho" previousText="Anterior" nextText="Proximo"></pagination>
+
+  </div>
+</div>
+
+
+
+<ng-template #relatorio>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Relatório das Pessoas</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  </div>
+</ng-template>

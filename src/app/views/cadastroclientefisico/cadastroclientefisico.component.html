@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row">
+    <a class="link-primary" [routerLink]="['/']" routerLinkActive="router-link-active" >Voltar</a>
+    <h3>{{isAtualizar()? 'Atualizar': 'Novo'}} Cliente Físico</h3>
+    <form [formGroup]="formulario">
+      <div class="row">
+        <div class="col-2">
+          <div class="form-group">
+            <label for="nome">Id</label>
+
+            <input type="text" [value]="isAtualizar()? id : ''"  class="form-control" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="nome">Nome<span  [ngClass]="getCssFormulario('nome')">*</span></label>
+            <input type="text" placeholder="Nome" formControlName="nome" class="form-control">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="nome">Telefone<span  [ngClass]="getCssFormulario('telefone')">*</span></label>
+            <input type="text" placeholder="(00) 0 0000-0000" mask="(00) 0 0000-0000"  formControlName="telefone" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="nome">Cpf<span  [ngClass]="getCssFormulario('cpf')">*</span></label>
+            <input type="text" placeholder="000.000.000-00" mask="000.000.000-00" formControlName="cpf" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group" formGroupName="endereco">
+            <label for="nome">Cep</label>
+            <input type="text" mask='00000-000' (blur)="buscarCep()" placeholder="Cep" formControlName="cep" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Rua</label>
+            <input type="text" placeholder="Rua" formControlName="rua" class="form-control">
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Numero</label>
+            <input type="text" placeholder="Numero" formControlName="numero" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Complemento</label>
+            <input type="text" placeholder="Complemento" formControlName="complemento" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Bairro</label>
+            <input type="text" placeholder="Bairro" formControlName="bairro" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Cidade</label>
+            <input type="text" placeholder="Cidade" formControlName="cidade" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group"  formGroupName="endereco">
+            <label for="nome">Estado</label>
+            <input type="text" placeholder="Estado" formControlName="uf" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-3">
+          <button class="btn btn-primary" (click)="salvar()" [disabled]="formulario.invalid"> Salvar</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
